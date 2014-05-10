@@ -7,6 +7,30 @@
 	<groupId>git-online-commit-sample</groupId>
 	<artifactId>git-online-commit-sample</artifactId>
 	<version>1.0-SNAPSHOT</version>
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.jgit</groupId>
+			<artifactId>org.eclipse.jgit.pgm</artifactId>
+			<version>3.3.2.201404171909-r</version>
+		</dependency>
 
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>12.0</version>
+		</dependency>
 
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<!-- For UnitTest -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit-dep</artifactId>
+			<version>4.8.2</version>
+		</dependency>
+	</dependencies>
 </project>

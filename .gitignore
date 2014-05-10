@@ -8,7 +8,8 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 
-
+.idea/
+*.iml
 ### Java ###
 *.class
 
