@@ -22,11 +22,22 @@ public class FileEntry {
 	private byte[] contentBytes;
 	private String path;
 
+	public boolean isDir() {
+		return dir;
+	}
+
+	public void setDir(boolean dir) {
+		this.dir = dir;
+	}
+
+	public boolean dir;
+
 	public long getFileSize() {
 		return fileSize;
 	}
 
 	private long fileSize;
+
 
 	public String getContent() {
 		return content;

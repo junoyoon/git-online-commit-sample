@@ -15,6 +15,7 @@ import org.eclipse.jgit.treewalk.filter.PathFilterGroup;
 import org.eclipse.jgit.util.StringUtils;
 import org.junit.Test;
 import org.junoyoon.gitonline.cmd.OnlineAddCommand;
+import org.junoyoon.gitonline.cmd.OnlineLsCommand;
 import org.junoyoon.gitonline.cmd.OnlineRmCommand;
 import org.junoyoon.gitonline.model.FileEntry;
 import org.junoyoon.gitonline.model.User;
@@ -149,6 +150,18 @@ public class GitCommandTest {
 		for (RevCommit each : git.log().setMaxCount(1).call()) {
 			System.out.println(each.getShortMessage());
 		}
+	}
+
+	@Test
+	public void testLs() throws IOException, GitAPIException {
+		Git git = getGit();
+		addFile(git, "wwww/REAdDME33", "2222222222222222223333333333" + Math.random());
+		addFile(git, "wwww/1wewew/REAd22DME33", "2222222222222222223333333333" + Math.random());
+		OnlineLsCommand command = new OnlineLsCommand(git.getRepository());
+		for (FileEntry each : command.getLs("HEAD", "wwww")) {
+			System.out.println(each.getPath() + "-" + each.isDir());
+		}
+
 	}
 
 }
