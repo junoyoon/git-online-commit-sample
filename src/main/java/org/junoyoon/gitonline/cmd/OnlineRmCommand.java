@@ -15,17 +15,18 @@ import org.eclipse.jgit.util.FS;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class OnlineRmCommand extends OnlineCommand {
 	@Override
-	protected void prepare(List<FileEntry> fileEntries, File rootDir) {
-		// no op
+	protected List<File> prepare(List<FileEntry> fileEntries, File rootDir) {
+		return new ArrayList<File>();
 	}
 
 	@Override
-	protected DirCache createDirCache(Repository repo, File liveFile, File root, Collection<String> paths) {
+	public DirCache createDirCache(Repository repo, File liveFile, File root, Collection<String> paths) {
 		DirCache dc = null;
 		//noinspection SpellCheckingInspection
 		ObjectInserter inserter = repo.newObjectInserter();

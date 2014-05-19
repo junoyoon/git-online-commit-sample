@@ -22,6 +22,12 @@ public class FileEntry {
 	private byte[] contentBytes;
 	private String path;
 
+	public long getFileSize() {
+		return fileSize;
+	}
+
+	private long fileSize;
+
 	public String getContent() {
 		return content;
 	}
@@ -44,5 +50,9 @@ public class FileEntry {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
 	}
 }
