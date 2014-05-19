@@ -30,33 +30,6 @@ import static org.apache.commons.io.FileUtils.deleteQuietly;
 
 public abstract class OnlineCommand {
 
-	public void call(FileRepository repo, List<FileEntry> fileEntries, User author, User committer, String message) {
-		List<File> prepare = null;
-		try {
-			final Git git = new Git(repo);
-			prepare = prepare(fileEntries, repo.getWorkTree());
-			AddCommand command = git.add();
-			for (String each : convert(fileEntries)) {
-				command.addFilepattern(each);
-			}
-			command.call();
-			final CommitCommand commit = git.commit();
-			for (String each : convert(fileEntries)) {
-				commit.setOnly(each);
-			}
-			commit.setMessage(message);
-			commit.call();
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		} finally {
-			if (prepare != null) {
-				for (File each : prepare) {
-					FileUtils.deleteQuietly(each);
-				}
-			}
-		}
-	}
-
 	protected Collection<String> convert(List<FileEntry> fileEntries) {
 		List<String> paths = newArrayList();
 		for (FileEntry each : fileEntries) {
@@ -65,9 +38,6 @@ public abstract class OnlineCommand {
 		return paths;
 	}
 
-	protected abstract List<File> prepare(List<FileEntry> fileEntries, File rootDir);
-
-	public abstract DirCache createDirCache(Repository repo, File liveFile, File root, Collection<String> paths);
-
+	abstract public void call(FileRepository repo, List<FileEntry> fileEntries, User author, User committer, String message);
 
 }

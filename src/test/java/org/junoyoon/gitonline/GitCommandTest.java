@@ -38,8 +38,8 @@ public class GitCommandTest {
 			tempDir.mkdirs();
 			File tempWorkTree = Files.createTempDir();
 			FileUtils.copyDirectory(bareRepoDir, tempDir);
-			System.out.println(tempDir.getPath());
 			RepositoryBuilder builder = new RepositoryBuilder().setGitDir(tempDir).setWorkTree(tempWorkTree).readEnvironment();
+			FileUtils.deleteQuietly(builder.getIndexFile());
 			Repository build = builder.build();
 			return new Git(build);
 		} catch (IOException e) {
@@ -64,8 +64,8 @@ public class GitCommandTest {
 		OnlineAddCommand onlineAddCommand = new OnlineAddCommand();
 		onlineAddCommand.call((FileRepository) git.getRepository(), newArrayList(fileEntry), author, committer, "ADD");
 		// See what's changed
-		for (RevCommit each : git.log().setMaxCount(3).call()) {
-			System.out.println(each.getType() + " " + each.getShortMessage());
+		for (RevCommit each : git.log().setMaxCount(1).call()) {
+			System.out.println(each.getShortMessage());
 		}
 	}
 
@@ -141,8 +141,9 @@ public class GitCommandTest {
 		// Delete file from bare repo
 		User author = new User("admin", "admin@gmail.com");
 		User committer = new User("admin2", "admin2@gmail.com");
+		addFile(git, "wwww/REAdDME33", "2222222222222222223333333333" + Math.random());
 		FileEntry fileEntry = new FileEntry();
-		fileEntry.setPath("www/www");
+		fileEntry.setPath("wwww/REAdDME33");
 		OnlineRmCommand onlineRmCommand = new OnlineRmCommand();
 		onlineRmCommand.call((FileRepository) getGit().getRepository(), newArrayList(fileEntry), author, committer, "DELETE");
 		for (RevCommit each : git.log().setMaxCount(1).call()) {
