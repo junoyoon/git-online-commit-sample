@@ -3,7 +3,7 @@
 	filemode = false
 	bare = true
 	symlinks = false
-	ignorecase = true
+	ignorecase = false
 	hideDotFiles = dotGitOnly
 [remote "origin"]
 	url = https://github.com/nhnopensource/universal-analytics-java
